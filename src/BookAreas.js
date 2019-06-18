@@ -7,7 +7,7 @@ class BookAreas extends React.Component {
 
     render() {
 
-        const { bookAreaType } = this.props;
+        const { bookAreaType, books, updateShelf } = this.props;
 
 
         return (
@@ -17,9 +17,13 @@ class BookAreas extends React.Component {
                         <h2 className='bookshelf-title'>{bookAreaType}</h2>
                         <div className='bookshelf-books'>
                             <ol className='books-grid'>
-                                <li>
-                                    <Book/>
-                                </li>
+                                {books.map(book => (
+                                    <li key={book.id}>
+                                        <Book book={book}
+                                              updateShelf={updateShelf}
+                                        />
+                                    </li>
+                                ))}
                             </ol>
                         </div>
                     </div>

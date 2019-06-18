@@ -1,17 +1,19 @@
-# MyReads Project
+# MyReads项目
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
-
-Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
-
+这是Udacity的React Fundamentals课程最终评估项目的入门模板。此模板的目标是通过提供可以使用的CSS和HTML标记的静态示例来节省您的时间，但不需要任何完成项目所需的React代码。如果您选择从此模板开始，您的工作将是通过重构此模板中的静态代码来为应用添加交互性。
+当然，如果您愿意，您可以从头开始自由地开始这个项目！请务必使用[Create React App]（https://github.com/facebookincubator/create-react-app）来引导项目。
 ## TL;DR
 
-To get started developing right away:
+立即开始开发：
 
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
+*使用`npm install`安装所有项目依赖项
 
-## What You're Getting
+*使用`npm start`启动开发服务器
+
+
+##你得到了什么
+
+
 ```bash
 ├── CONTRIBUTING.md
 ├── README.md - This file.
@@ -33,11 +35,10 @@ To get started developing right away:
     └── index.js # You should not need to modify this file. It is used for DOM rendering only.
 ```
 
-Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
+请记住，良好的React设计实践是为每个组件创建新的JS文件，并使用import / require语句将它们包含在需要它们的位置。
+##后端服务器
 
-## Backend Server
-
-To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
+为了简化您的开发过程，我们提供了一个后端服务器供您进行开发。提供的文件[`BooksAPI.js`]（src / BooksAPI.js）包含在后端执行必要操作所需的方法：
 
 * [`getAll`](#getall)
 * [`update`](#update)
@@ -51,8 +52,9 @@ Method Signature:
 getAll()
 ```
 
-* Returns a Promise which resolves to a JSON object containing a collection of book objects.
-* This collection represents the books currently in the bookshelves in your app.
+*返回一个Promise，它解析为包含一个book对象集合的JSON对象。
+
+*此系列代表您应用中书架中的书籍。
 
 ### `update`
 
@@ -62,9 +64,11 @@ Method Signature:
 update(book, shelf)
 ```
 
-* book: `<Object>` containing at minimum an `id` attribute
-* shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]  
-* Returns a Promise which resolves to a JSON object containing the response data of the POST request
+* book：`<Object>`至少包含`id`属性
+
+* shelf：`<String>`包含[“wantToRead”，“CurrentlyReading”，“read”]之一
+
+*返回一个Promise，它解析为包含POST请求的响应数据的JSON对象
 
 ### `search`
 
@@ -75,18 +79,19 @@ search(query)
 ```
 
 * query: `<String>`
-* Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
-* These books do not know which shelf they are on. They are raw results only. You'll need to make sure that books have the correct state while on the search page.
+
+*返回一个Promise，它解析为一个JSON对象，该对象包含最多20个book对象的集合。
+
+*这些书不知道他们在哪个架子上。它们只是原始结果。在搜索页面上，您需要确保图书具有正确的状态。
 
 ## Important
-The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
-
+后端API使用一组固定的缓存搜索结果，并且仅限于一组特定的搜索项，可以在[SEARCH_TERMS.md]（SEARCH_TERMS.md）中找到。该术语列表是与后端一起使用的_only_术语，因此如果您对Basket Weaving或Bubble Wrap的搜索没有带来任何结果，请不要感到惊讶。
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+此存储库是_all_ Udacity学生的入门代码。因此，我们很可能不接受拉取请求。
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+有关详细信息，请查看[CONTRIBUTING.md]（CONTRIBUTING.md）。
