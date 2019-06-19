@@ -1,11 +1,40 @@
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
+import Book from './Book';
 
 
 class BookSearch extends React.Component{
 
+    state ={
+        query: '',
+        searchBooks: []
+    };
+
+    searchBooks = (query) => {
+        if (!query) {
+            this.setState({query: '', searchBooks: []});
+        } else {
+            this.setState({query:query.trim()});
+            BooksAPI.search(query).then((books) => {
+                if (books.error) {
+                    books = []
+                }
+                books.map(book => (this.props.books.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)));
+                this.setState({searchBooks:books})
+            })
+        }
+
+    };
+
     render() {
+
+        const { moveBook} = this.props;
+
+        const { searchBooks } = this.state;
+
+
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -21,12 +50,23 @@ class BookSearch extends React.Component{
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                        <input type="text" placeholder="Search by title or author"/>
+                        <input type="text"
+                               placeholder="Search by title or author"
+                               onChange={ (e) => this.searchBooks(e.target.value) }
+                        />
 
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid"></ol>
+                    <ol className="books-grid">
+                        {searchBooks.map(book => (
+                            <Book
+                                book={book}
+                                key={book.id}
+                                moveBook={moveBook}
+                            />
+                        ))}
+                    </ol>
                 </div>
             </div>
         );

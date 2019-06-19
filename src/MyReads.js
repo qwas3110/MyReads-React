@@ -50,7 +50,10 @@ class MyReads extends React.Component{
                 )} />
 
                 <Route path='/search' render={() => (
-                    <BookSearch/>
+                    <BookSearch
+                        books={this.state.books}
+                        moveBook={this.moveBook}
+                    />
                 )}/>
             </div>
         );

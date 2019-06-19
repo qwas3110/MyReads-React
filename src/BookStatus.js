@@ -17,7 +17,7 @@ class BookStatus extends React.Component{
 
         return (
             <div className="book-shelf-changer">
-                <select defaultValue={book.shelf}
+                <select value={book.shelf || 'none'}
                         onChange={this.changeShelf}
                 >
                     <option value="move" disabled>Move to...</option>
