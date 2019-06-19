@@ -2,16 +2,23 @@ import React from 'react';
 import './App.css';
 
 
-class BookStatus extends React.Component {
+class BookStatus extends React.Component{
+
+    changeShelf = (e) => {
+        this.props.moveBook(this.props.book,e.target.value);
+    };
+
 
     render() {
 
-        const { book, shelf, updateShelf } = this.props;
+        const { book } = this.props;
+
+
 
         return (
             <div className="book-shelf-changer">
-                <select value={shelf}
-                        onChange={() => updateShelf(book,shelf)}
+                <select defaultValue={book.shelf}
+                        onChange={this.changeShelf}
                 >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>

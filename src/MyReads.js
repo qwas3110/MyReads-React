@@ -1,56 +1,47 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import * as BooksAPI from './BooksAPI'
-import BookAreas from './BookAreas';
-import BookSearch from './BookSearch';
+import { Link, Route } from 'react-router-dom';
 import './App.css';
+import Header from "./Header";
+import * as BooksAPI from './BooksAPI';
+import BookAreas from './BookAreas';
+import BookSearch from "./BookSearch";
 
-
-class MyReads extends React.Component {
+class MyReads extends React.Component{
 
     state = {
-        bookAreaType: ['currentlyReading','wantToRead','read'],
         books: []
     };
 
-
     componentDidMount() {
-        BooksAPI.getAll().then((books) => {
+        BooksAPI.getAll().then(books => {
             this.setState({books})
         })
+    }
+
+    moveBook = (book, shelf) => {
+        if (this.state.books) {
+            BooksAPI.update(book,shelf).then(() => {
+                book.shelf = shelf;
+                this.setState(state => ({
+                    books: state.books.filter(b => b.id !== book.id).concat([book])
+                }))
+            })
+        }
     };
 
-    updateBookShelf = (book) => {
-
-    };
 
     render() {
 
-        const { books } = this.state;
-
-        const currentlyReading = books.filter(b => b.shelf === 'currentlyReading');
-        const wantToRead = books.filter(b => b.shelf === 'wantToRead');
-        const read = books.filter(b => b.shelf === 'read');
-
-        console.log(currentlyReading);
-        console.log(wantToRead);
-        console.log(read);
         return (
-            <div className='list-books'>
+            <div className='app'>
                 <Route exact path='/' render={() => (
-                    <div>
-                        <div className='list-books-title'>
-                            <h1>我的阅读</h1>
-                        </div>
+                    <div className='list-books'>
+                        <Header/>
                         <BookAreas
-                            bookAreaType={this.state.bookAreaType[0]}
-                            books={currentlyReading}
-                            updateShelf={this.updateBookShelf}
+                            books={this.state.books}
+                            moveBook={this.moveBook}
                         />
-                        <BookAreas bookAreaType={this.state.bookAreaType[1]} books={wantToRead}/>
-                        <BookAreas bookAreaType={this.state.bookAreaType[2]} books={read}/>
-
-                        <div className='open-search'>
+                        <div className="open-search">
                             <Link to='/search'>
                                 <button>Add a book</button>
                             </Link>
@@ -60,12 +51,10 @@ class MyReads extends React.Component {
 
                 <Route path='/search' render={() => (
                     <BookSearch/>
-                )} />
+                )}/>
             </div>
-
         );
     }
 }
-
 
 export default MyReads;

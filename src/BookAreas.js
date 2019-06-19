@@ -1,33 +1,37 @@
 import React from 'react';
-import Book from './Book';
 import './App.css';
+import Book from "./Book";
 
 
-class BookAreas extends React.Component {
+class BookAreas extends React.Component{
 
     render() {
 
-        const { bookAreaType, books, updateShelf } = this.props;
+        const { books, moveBook } = this.props;
+        const shelf = ["currentlyReading","wantToRead", "read"];
+        const bookShelfTitle = ["目前正在阅读", "想读", '已读'];
 
 
         return (
-            <div className='list-books-content'>
-                <div>
-                    <div className='bookshelf'>
-                        <h2 className='bookshelf-title'>{bookAreaType}</h2>
-                        <div className='bookshelf-books'>
-                            <ol className='books-grid'>
-                                {books.map(book => (
-                                    <li key={book.id}>
-                                        <Book book={book}
-                                              updateShelf={updateShelf}
+            <div>
+                {bookShelfTitle.map((title,index) => (
+                    <div className="bookshelf" key={index}>
+                        <h2 className="bookshelf-title">{title}</h2>
+                        <div className="bookshelf-books">
+                            <ol className="books-grid">
+                                {
+                                    books.filter(b => b.shelf === shelf[index]).map(book => (
+                                        <Book
+                                            book={book}
+                                            key={book.id}
+                                            moveBook={moveBook}
                                         />
-                                    </li>
-                                ))}
+                                    ))
+                                }
                             </ol>
                         </div>
                     </div>
-                </div>
+                ))}
             </div>
         );
     }
