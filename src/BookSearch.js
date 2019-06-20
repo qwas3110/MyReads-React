@@ -3,9 +3,15 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
-
+import sortBy from 'sort-by';
+import PropTypes from 'prop-types';
 
 class BookSearch extends React.Component{
+
+    static propTypes = {
+        books: PropTypes.array,
+        moveBook: PropTypes.func.isRequired
+    };
 
     state ={
         query: '',
@@ -59,13 +65,18 @@ class BookSearch extends React.Component{
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {searchBooks.map(book => (
-                            <Book
-                                book={book}
-                                key={book.id}
-                                moveBook={moveBook}
-                            />
-                        ))}
+
+                        {
+                            searchBooks.sort(sortBy('title'))
+                                       .map(book => (
+                                           <Book
+                                               book={book}
+                                               key={book.id}
+                                               moveBook={moveBook}
+                                           />
+                                       ))
+                        }
+
                     </ol>
                 </div>
             </div>

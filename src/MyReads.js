@@ -36,7 +36,7 @@ class MyReads extends React.Component{
             <div className='app'>
                 <Route exact path='/' render={() => (
                     <div className='list-books'>
-                        <Header/>
+                        <Header title={'我的读物'}/>
                         <BookAreas
                             books={this.state.books}
                             moveBook={this.moveBook}
